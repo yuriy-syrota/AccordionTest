@@ -1,0 +1,36 @@
+<!-- MAIN ACCORDION -->
+<accordion>
+  <acc-section *ngFor="let section of testSectionData; index as ind" [headerText]="section.sectionName" [sectionIndex]="ind" (sectionExpanded)="onSectionExpanded($event)">
+    <!-- NESTED ACCORDION -->
+    <accordion>
+      <!-- DATA SECTION -->
+      <acc-section headerText="Data" isExpanded="true">
+        <table>
+          <tr><th>Industrials</th><td>{{section.industrials}}%</td></tr>
+          <tr><th>Real Estate</th><td>{{section.realEstate}}%</td></tr>
+          <tr><th>Information Technology</th><td>{{section.informationTechnology}}%</td></tr>
+          <tr><th>Communication Services</th><td>{{section.communicationServices}}%</td></tr>
+          <tr><th>Health Care</th><td>{{section.healthCare}}%</td></tr>
+          <tr><th>Materials</th><td>{{section.materials}}%</td></tr>
+          <tr><th>Utilities</th><td>{{section.utilities}}%</td></tr>
+          <tr><th>Consumer Staples</th><td>{{section.consumerStaples}}%</td></tr>
+          <tr><th>Consumer Discretionary</th><td>{{section.consumerDiscretionary}}%</td></tr>
+          <tr><th>Financials</th><td>{{section.financials}}%</td></tr>
+          <tr><th>Energy</th><td>{{section.energy}}%</td></tr>
+        </table>
+      </acc-section>
+      <!-- CHART SECTION -->
+      <acc-section headerText="Chart">
+        <ngx-charts-bar-vertical-2d 
+          [view]="[600, 400]"
+          [results]="testSectionChartData" [gradient]="false"
+          [animations]="true" [xAxis]="false" [barPadding]="4" [showDataLabel]="false"
+          [yAxis]="true" [legend]="true" [showXAxisLabel]="false" [showYAxisLabel]="false" [tooltipDisabled]="false">
+          <ng-template #tooltipTemplate let-model="model">
+            {{model.name}}: {{model.value}}%
+          </ng-template>
+        </ngx-charts-bar-vertical-2d>        
+      </acc-section>
+    </accordion>
+  </acc-section>
+</accordion>
